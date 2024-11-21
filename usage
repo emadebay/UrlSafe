@@ -1,0 +1,61 @@
+
+
+'''
+
+To install dependencies
+pip install -r requirements.txt
+
+
+import requests
+
+# Define the URL of the Flask application endpoint
+base_url = "http://localhost:5000/read_url"  # Update to the correct server and port if different
+# Specify the URL to be checked
+url_to_check = "http://example.com"
+# Make the GET request with the target URL as a parameter
+response = requests.get(base_url, params={"url": url_to_check})
+# Check if the request was successful and print the result
+if response.status_code == 200:
+    data = response.json()
+    print("URL:", data.get("url"))
+    print("Type:", data.get("type"))
+else:
+    print("Error:", response.json().get("error"))
+
+Adding a URL (POST Request):
+import requests
+
+url = 'http://127.0.0.1:5000/add_url'
+data = {'url': 'http://newsite.com', 'type': 'safe'}
+headers = {'Authorization': 'YourAdminKey'}
+# Send the POST request with data and headers
+response = requests.post(url, json=data, headers=headers)
+# Print the response
+print(response.json())
+
+
+Updating a URL (PUT Request):
+
+url = 'http://127.0.0.1:5000/update_url'
+data = {'url': 'http://example.com', 'type': 'malicious'}
+# Specify the admin key in the headers
+headers = {'Authorization': 'YourAdminKey'}
+# Send the PUT request with data and headers
+response = requests.put(url, json=data, headers=headers)
+# Print the response
+print(response.json())
+
+
+Deleting a URL (DELETE Request):
+import requests
+
+url = 'http://127.0.0.1:5000/delete_url'
+data = {'url': 'http://example.com'}
+# Specify the admin key in the headers
+headers = {'Authorization': 'YourAdminKey'}
+# Send the DELETE request with data and headers
+response = requests.delete(url, json=data, headers=headers)
+# Print the response
+print(response.json())
+
+'''
