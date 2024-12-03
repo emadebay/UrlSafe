@@ -91,7 +91,4 @@ async def delete_url(url_data: URLData, is_admin: bool = Depends(require_admin))
     
     raise HTTPException(status_code=404, detail="URL not found")
 
-# To run the app, use the command:
-'''
-hypercorn app:app --reload
-'''
+
