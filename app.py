@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from pydantic import BaseModel
 from functools import wraps
 from lru import LRUCache  # Import your LRUCache class
-# from safeNet import predict_url_label
+# from safeNet import predict_url
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -46,10 +46,10 @@ async def predict_url(url: str):
         return {"url": url_data["url"], "label": url_data["type"]}
     
     # If not found in cache or database, predict the label
-    # predicted_label = predict_url_label(url)
-    predicted_label = "benign"
-    # Save the predicted label to the database and cache
-    collection.insert_one({"url": url, "type": predicted_label})
+    predicted_label = predict_url_label(url)
+    # # predicted_label = "benign"
+    # # Save the predicted label to the database and cache
+    # collection.insert_one({"url": url, "type": predicted_label})
     cache.put(url, predicted_label)
     
     return {"url": url, "label": predicted_label}
@@ -92,4 +92,6 @@ async def delete_url(url_data: URLData, is_admin: bool = Depends(require_admin))
     raise HTTPException(status_code=404, detail="URL not found")
 
 # To run the app, use the command:
-# uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+'''
+hypercorn app:app --reload
+'''
