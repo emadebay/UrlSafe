@@ -2,7 +2,7 @@ import tensorflow as tf
 from transformers import DistilBertTokenizerFast
 
 # Load the TensorFlow model (using the saved directory)
-model = tf.keras.models.load_model('path/to/malicious_phish_model')
+model = tf.keras.models.load_model('malicious_phish_model')
 
 # Initialize the tokenizer (same tokenizer used during training)
 tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
